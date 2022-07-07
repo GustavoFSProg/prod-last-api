@@ -2,6 +2,7 @@ import { PrismaClient } from '@prisma/client'
 var cloudinary = require('cloudinary')
 
 import dotenv from 'dotenv'
+import { Request, Response } from 'express'
 
 const prisma = new PrismaClient()
 
@@ -10,7 +11,7 @@ var resultado = ''
 
 dotenv.config()
 
-async function register(req, res) {
+async function register(req: Request, res: Response) {
   try {
     cloudinary.config({
       cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -39,7 +40,7 @@ async function register(req, res) {
   }
 }
 
-async function getAll(req, res) {
+async function getAll(req: Request, res: Response) {
   try {
     const data = await prisma.products.findMany({
       orderBy: {
@@ -53,7 +54,7 @@ async function getAll(req, res) {
   }
 }
 
-async function deleteImage(req, res) {
+async function deleteImage(req: Request, res: Response) {
   try {
     const data = await prisma.products.findFirst({
       where: { id: req.params.id },
@@ -74,7 +75,7 @@ async function deleteImage(req, res) {
   }
 }
 
-async function update(req, res) {
+async function update(req: Request, res: Response) {
   try {
     await prisma.products.update({
       where: { id: req.params.id },
@@ -92,7 +93,7 @@ async function update(req, res) {
   }
 }
 
-async function deleter() {
+async function deleter(req: Request, res: Response) {
   try {
     await prisma.products.delete({
       where: { id: req.params.id },
