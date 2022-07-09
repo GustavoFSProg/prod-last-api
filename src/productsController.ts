@@ -43,6 +43,7 @@ async function register(req: Request, res: Response) {
 async function getAll(req: Request, res: Response) {
   try {
     const data = await prisma.products.findMany({
+      take: 6,
       orderBy: {
         createAt: 'desc',
       },
