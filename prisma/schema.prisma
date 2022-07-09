@@ -18,3 +18,12 @@ model Products {
   image    String
   createAt DateTime @default(now())
 }
+
+model Users {
+
+  id       String   @id @default(uuid())
+  name     String
+  email    String   @unique
+  password String
+  createAt DateTime @default(now())
+}
